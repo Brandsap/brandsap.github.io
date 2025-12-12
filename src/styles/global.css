@@ -607,14 +607,14 @@ HERO
 ========================= */
 
 .hero-section {
-padding-top: 2.4rem;
+padding-top: 1.4rem;
 background: transparent;
 }
 
 .hero-grid {
 display: grid;
 grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-gap: 3rem;
+gap: 1.5rem;
 align-items: center;
 }
 
@@ -1146,6 +1146,19 @@ RESPONSIVE
 ========================= */
 
 @media (max-width: 1024px) {
+
+main {
+    padding-top: 60px !important;   /* much smaller */
+  }
+
+  .hero-section {
+    padding-top: 1rem !important;   /* reduces the big gap */
+  }
+
+  .hero-title {
+    margin-top: 0.2rem !important;  /* tighten spacing above heading */
+  }
+
 .hero-grid {
 grid-template-columns: minmax(0, 1fr);
 }
@@ -1166,6 +1179,21 @@ align-items: flex-start;
 }
 
 @media (max-width: 768px) {
+.pill, 
+  .hero-pill {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: inline-flex !important;
+  }
+
+  /* Ensure container centers inline children */
+  .section-heading,
+  .hero-section,
+  .hero-grid {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
 .section {
 padding: 3.2rem 0 2.8rem;
 }
@@ -1175,11 +1203,6 @@ padding: 3.2rem 0 2.8rem;
 grid-template-columns: minmax(0, 1fr);
 }
 
-.section-heading {
-flex-direction: column;
-align-items: center;
-text-align: center;
-}
 
 .footer-right {
 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1193,6 +1216,13 @@ gap: 0.75rem;
 
 .input-row {
 flex-direction: column;
+}
+
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 55vh;   /* centers content visually */
 }
 
 .hero-card-float {
