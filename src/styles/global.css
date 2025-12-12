@@ -154,16 +154,15 @@ main {
 
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0 0 auto 0;
   z-index: 40;
+
+  padding: 1.1rem 0;     /* <-- ADD THIS (TOP & BOTTOM SPACE) */
 
   background: rgba(5, 5, 9, 0.94);
   border-bottom: 1px solid var(--border-subtle);
   backdrop-filter: blur(16px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
-
   transition: background 160ms ease, box-shadow 160ms ease,
     border-color 160ms ease;
 }
@@ -178,7 +177,254 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.8rem 1.5rem;
+  padding: 3.25rem 3.8rem;   /* Increase these two numbers */
+}
+
+/* -------------------------------------------------
+   NAVBAR BRAND — clean pill + logo
+-------------------------------------------------- */
+
+.nav-brand-pill {
+  display: flex;
+  align-items: center;
+  padding: 0.45rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: radial-gradient(
+      circle at top left,
+      rgba(20, 28, 48, 0.92),
+      rgba(25, 32, 56, 0.98)
+  );
+  gap: 0.55rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease,
+    transform 0.18s ease;
+}
+
+.nav-brand-pill:hover {
+  border-color: rgba(255, 200, 80, 0.55);
+  transform: translateY(-1px);
+}
+
+/* Logo circle */
+.nav-brand-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #000;
+  border: 2px solid #d4a017;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(212, 160, 23, 0.35);
+  overflow: hidden;
+}
+
+.nav-brand-icon img,
+.nav-brand-icon .nav-brand-icon-img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+
+/* BRANDSAP text */
+.nav-brand-name {
+  font-size: 0.82rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #f1f5f9;
+}
+
+/* -------------------------------------------------
+   NAV LINKS (desktop)
+-------------------------------------------------- */
+
+.nav-desktop {
+  display: none;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+@media (min-width: 900px) {
+  .nav-desktop {
+    display: flex;
+  }
+}
+
+.nav-link {
+  position: relative;
+  font-size: 0.96rem;
+  color: rgba(209, 213, 219, 0.75);
+  text-decoration: none;
+  padding: 0.2rem 0;
+  transition: color 0.18s ease;
+}
+
+.nav-link:hover {
+  color: rgba(249, 250, 251, 0.95);
+}
+
+/* active state with yellow underline */
+.nav-link--active {
+  color: #f9fafb;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.45rem;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: #facc15;
+  opacity: 0;
+  transition: width 0.18s ease, opacity 0.18s ease;
+}
+
+.nav-link--active::after {
+  width: 60%;
+  opacity: 1;
+}
+
+/* -------------------------------------------------
+   CONTACT BUTTON (nav-primary)
+-------------------------------------------------- */
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* premium gold CTA */
+.nav-primary {
+  padding: 0.55rem 1.8rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+
+  background: linear-gradient(
+    135deg,
+    #ffcc4d 0%,
+    #ffb629 45%,
+    #ff9f1c 100%
+  );
+  color: #1a1a1a;
+
+  box-shadow: 0 4px 14px rgba(255, 194, 74, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.25s ease,
+    background 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-primary:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(
+    135deg,
+    #ffd978 0%,
+    #ffc34e 40%,
+    #ffb02a 100%
+  );
+  box-shadow: 0 6px 20px rgba(255, 194, 74, 0.55);
+}
+
+.nav-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 194, 74, 0.35);
+}
+
+/* optional subtle glowing ring on hover */
+.nav-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, #ffdc8a, #ffb629, #ffdc8a);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-primary:hover::after {
+  opacity: 1;
+}
+
+/* -------------------------------------------------
+   MOBILE NAV
+-------------------------------------------------- */
+
+.nav-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.18rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(75, 85, 99, 0.7);
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 60%;
+  margin: 0 auto;
+  border-radius: 999px;
+  background: rgba(209, 213, 219, 0.85);
+}
+
+/* show toggle only on mobile */
+@media (min-width: 900px) {
+  .nav-toggle {
+    display: none;
+  }
+}
+
+/* mobile sheet */
+.nav-mobile.sheet {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 35;
+  background: rgba(3, 4, 10, 0.98);
+  border-bottom: 1px solid #1f2933;
+  padding: 1rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.nav-link-mobile {
+  font-size: 0.95rem;
+  color: rgba(229, 231, 235, 0.9);
+  text-decoration: none;
+}
+
+.nav-link-mobile.nav-link--active {
+  color: #facc15;
+}
+
+.mobile-cta {
+  margin-top: 0.75rem;
+}
+
+/* hide mobile sheet on desktop */
+@media (min-width: 900px) {
+  .nav-mobile.sheet {
+    display: none;
+  }
 }
 
 /* Brand mark */
@@ -773,70 +1019,299 @@ main {
    FOOTER
    ========================= */
 
+/* ===========================
+   Footer
+   =========================== */
+
 .footer {
-  margin-top: 2.5rem;
-  border-top: 1px solid var(--border-subtle);
-  background: #050509;
+  border-top: 1px solid rgba(148, 163, 184, 0.18); /* subtle divider */
+  padding: 3.5rem 0 1.5rem;
+  background: radial-gradient(circle at top left,
+      rgba(148, 163, 184, 0.08),
+      transparent 55%);
 }
 
 .footer-inner {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
   gap: 3rem;
-  padding: 2.2rem 1.5rem 2rem;
+  align-items: flex-start;
+}
+
+@media (min-width: 900px) {
+  .footer-inner {
+    grid-template-columns: minmax(0, 2.2fr) minmax(0, 4fr);
+  }
+}
+
+.footer-left {
+  max-width: 340px;
+}
+
+.brand-mark-wrapper {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: radial-gradient(circle at top left,
+      rgba(15, 23, 42, 0.85),
+      rgba(15, 23, 42, 0.95));
+  margin-bottom: 1.5rem;
+  gap: 0.4rem;
+}
+
+.brand-name {
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #e5e7eb;
 }
 
 .footer-text {
-  margin-top: 0.7rem;
-  max-width: 320px;
-  color: var(--text-soft);
-  font-size: 0.86rem;
+  font-size: 0.7rem;
+  line-height: 1.6;
+  color: rgba(209, 213, 219, 0.78);
+  margin-bottom: 1rem;
 }
 
+.footer-text-sub {
+  font-size: 0.7rem;
+  line-height: 1.7;
+  color: #f9fafb;
+}
+
+/* right grid */
+
 .footer-right {
-  display: flex;
-  gap: 2.8rem;
-  font-size: 0.86rem;
+  display: grid;
+  gap: 2.5rem;
+}
+
+@media (min-width: 900px) {
+  .footer-right {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
 }
 
 .footer-column h4 {
-  margin: 0 0 0.5rem;
   font-size: 0.8rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--text-muted);
+  margin-bottom: 1.1rem;
+  color: rgba(156, 163, 175, 0.95);
 }
 
-.footer-column a {
+/* ===========================
+   Footer links → soft tiles
+   =========================== */
+
+.footer {
+  border-top: 1px solid rgba(148, 163, 184, 0.18);
+  padding: 3rem 0 1.5rem;
+  background: radial-gradient(circle at top left,
+      rgba(148, 163, 184, 0.05),
+      transparent 55%);
+}
+
+.container {
+  max-width: 1200px;        /* keeps content centered */
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.footer-inner {
+  display: grid;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: center;  /* center entire footer */
+}
+
+@media (min-width: 900px) {
+  .footer-inner {
+    grid-template-columns: 300px auto; /* left fixed – right flexible */
+  }
+}
+
+/* --------------------------------------
+   Left Side
+--------------------------------------- */
+
+.footer-left {
+  text-align: left;
+}
+
+/* Footer brand pill – scoped so header logo is untouched */
+
+.footer-brand-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(15, 23, 42, 0.85);
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+}
+
+.footer-brand-name {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #e5e7eb;
+}
+
+.footer-text {
+  font-size: 0.85rem;       /* smaller text */
+  line-height: 1.55;
+  color: rgba(209, 213, 219, 0.75);
+  margin-bottom: 0.75rem;
+}
+
+.footer-text-sub {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #f9fafb;
+  margin-bottom: 0.75rem;
+}
+
+/* --------------------------------------
+   Right Columns
+--------------------------------------- */
+
+.footer-right {
+  display: grid;
+  gap: 2rem;
+  text-align: left;           /* left-aligned text */
+}
+
+@media (min-width: 900px) {
+  .footer-right {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.footer-column h4 {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  color: rgba(156, 163, 175, 0.85);
+}
+
+/* Simple text links */
+
+.footer-link-btn,
+.footer-link {
   display: block;
   margin-bottom: 0.25rem;
-  color: var(--text-silver);
+  font-size: 0.85rem;         /* smaller links */
+  cursor: pointer;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  color: rgba(229, 231, 235, 0.82);
+  transition: color 160ms ease, opacity 160ms ease;
 }
 
-.footer-column a:hover {
-  color: var(--accent-silver);
+.footer-link-btn:hover,
+.footer-link:hover {
+  color: #fff;
+  opacity: 1;
 }
 
+/* --------------------------------------
+   Bottom Bar
+--------------------------------------- */
 .footer-bottom {
-  border-top: 1px solid #11121a;
+  margin-top: 2.5rem;
+  border-top: 1px solid rgba(31, 41, 55, 0.85);
+  padding-top: 0.85rem;
 }
 
 .footer-bottom-inner {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0.8rem 1.5rem 1rem;
-  font-size: 0.78rem;
-  color: var(--text-soft);
+  justify-content: space-between;
+  gap: 1.25rem;
+  font-size: 0.75rem;
+  color: rgba(148, 163, 184, 0.9);
 }
 
-.footer-badge {
-  padding: 0.25rem 0.7rem;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--accent-gold);
-  background: var(--accent-gold-soft);
-  color: var(--accent-silver);
+/* left cluster */
+
+.footer-bottom-left {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
 }
+
+.footer-dot {
+  opacity: 0.6;
+}
+
+/* right cluster */
+
+.footer-bottom-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* “back to top” text button */
+
+.footer-bottom-link {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: rgba(209, 213, 219, 0.85);
+  text-decoration: none;
+  transition: color 140ms ease, opacity 140ms ease;
+}
+
+.footer-bottom-link:hover {
+  color: #f9fafb;
+  opacity: 1;
+}
+
+/* existing badge still works, just slightly smaller */
+.footer-badge {
+  padding: 0.35rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+/* mobile */
+
+@media (max-width: 768px) {
+  .footer-bottom-inner {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+}
+
+
+/* --------------------------------------
+   Mobile Tweaks
+--------------------------------------- */
+
+@media (max-width: 768px) {
+  .footer-right {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-bottom-inner {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
+
 
 /* =========================
    RESPONSIVE

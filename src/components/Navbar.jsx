@@ -25,13 +25,20 @@ export default function Navbar() {
   return (
     <header className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
       <div className="container navbar-inner">
-        <button className="brand-mark-wrapper" onClick={() => navigate("/")}>
-          <div className="brand-logo-ring">
-            <img src="/images/B Logo.png" alt="Brandsap Logo" className="brand-logo-inside" />
+
+        {/* BRAND LOGO */}
+        <button className="nav-brand-pill" onClick={() => navigate("/")}>
+          <div className="nav-brand-icon">
+            <img
+              src="/images/B Logo.png"
+              alt="Brandsap Logo"
+              className="nav-brand-icon-img"
+            />
           </div>
-          <span className="brand-name">BRANDSAP</span>
+          <span className="nav-brand-name">BRANDSAP</span>
         </button>
 
+        {/* DESKTOP NAV */}
         <nav className="nav-desktop">
           {NAV_LINKS.map((item) => (
             <NavLink
@@ -47,6 +54,7 @@ export default function Navbar() {
           ))}
         </nav>
 
+        {/* ACTIONS */}
         <div className="nav-actions">
           <button
             className="primary-btn nav-primary"
@@ -66,6 +74,7 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* MOBILE NAV */}
       {open && (
         <div className="nav-mobile sheet">
           {NAV_LINKS.map((item) => (
