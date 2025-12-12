@@ -9,24 +9,24 @@ export default function Hero() {
       <div className="container hero-grid">
         {/* LEFT SIDE */}
         <div className="hero-copy">
-          <div className="pill pill-soft hero-pill">
+          <div className="pill pill-soft hero-pill tectonic-blur">
             <span className="pill-dot" />
             BRANDSAP • Brand • Strategy • Digital
           </div>
 
-          <h1 className="hero-title">
+          <h1 className="hero-title tectonic-blur delay-1">
             Shape a brand
             <br />
             that sticks in memory.
           </h1>
 
-          <p className="hero-subtitle">
+          <p className="hero-subtitle tectonic-blur delay-2">
             We help modern teams turn ideas into sharp, memorable digital
             experiences – from visual identity and websites to launch-ready
             campaigns.
           </p>
 
-          <div className="hero-actions">
+          <div className="hero-actions tectonic-blur delay-3">
             {/* Go to Contact page */}
             <button
               className="primary-btn hero-primary"
@@ -44,7 +44,7 @@ export default function Hero() {
             </button>
           </div>
 
-          <div className="hero-meta">
+          <div className="hero-meta tectonic-blur delay-3">
             <span className="meta-label">Made for modern brands</span>
             <span className="meta-dot" />
             <span>Strategy, design &amp; web in one place.</span>
